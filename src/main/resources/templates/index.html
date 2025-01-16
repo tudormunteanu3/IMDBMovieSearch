@@ -5,8 +5,10 @@
 </head>
 <body>
 <h1>Search for a movie.</h1>
-<form action="#" th:action="@{/movie}" th:object="${movie}", method="get">
-    <p>Primary Title: <input type="text" th:field="*{primaryTitle}"></p>
+<form action="#" th:action="@{/search}" method="get">
+    <p>Enter a movie title:</p>
+    <input type="text" name="primaryTitle" placeholder="Search by Movie Title">
     <button type="submit">Search</button>
 </form>
 </body>
+</html>

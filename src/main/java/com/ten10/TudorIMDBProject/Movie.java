@@ -1,21 +1,20 @@
 package com.ten10.TudorIMDBProject;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.io.Serializable;
 
 @Entity
-public class Movie {
+@Table(indexes = @Index(name = "index_primaryTitle", columnList = "primaryTitle ASC"))
+public class Movie implements Serializable {
 
     @Id
     private int tconst;
     private String titleType;
+    @Lob
     private String primaryTitle;
 
-    protected Movie(int tconst) {
-        this.tconst = tconst;
-    }
+    protected Movie() {}
 
     public Movie(int tconst, String titleType, String primaryTitle){
         this.tconst = tconst;
@@ -26,8 +25,8 @@ public class Movie {
     @Override
     public String toString() {
         return String.format(
-                "Show:[type=%d, name='%s']",
-                titleType,primaryTitle);
+                "Show:[tconst=%d, type=%s, name='%s']",
+                tconst, titleType,primaryTitle);
     }
 
     public String getTitleType() {
@@ -38,6 +37,7 @@ public class Movie {
         this.titleType = titleType;
     }
 
+    @Lob
     public String getPrimaryTitle() {
         return primaryTitle;
     }
@@ -45,4 +45,8 @@ public class Movie {
     public void setPrimaryTitle(String primaryTitle) {
         this.primaryTitle = primaryTitle;
     }
+
+    public int getTconst() { return tconst; }
+
+    public void setTconst(int tconst) { this.tconst = tconst;}
 }

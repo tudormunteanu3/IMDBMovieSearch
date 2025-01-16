@@ -1,30 +1,24 @@
 package com.ten10.TudorIMDBProject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+@Controller
 public class MovieRepositoryController {
 
     @Autowired
     private MovieRepository movieRepository;
 
     public List<Movie> searchMoviesByTitle(String title) {
-        return movieRepository.findByTitleContains(title);
+        return movieRepository.findByPrimaryTitleIsContaining(title);
     }
 
-    public List<Movie> searchShowByType(String type) {
-        return movieRepository.findByType(type);
-    }
-
-    public void importFromDataset(List<Movie> movies) {
-        movieRepository.saveAll(movies);
-    }
-
-    @GetMapping("/homepage")
+    @GetMapping("/")
     public String showHomePage() {
         return "index";
     }
@@ -32,11 +26,9 @@ public class MovieRepositoryController {
     @GetMapping("/search")
     public String getMovies (
             @RequestParam (value = "primaryTitle") String primaryTitle, Model model) {
-        if (primaryTitle != null && !primaryTitle.isEmpty()){
-            model.addAttribute("primaryTitle", searchMoviesByTitle(primaryTitle));
-        } else {
-            model.addAttribute("titleType", searchMoviesByTitle(""));
-        }
+        List<Movie> movies;
+        movies = movieRepository.findByPrimaryTitleIsContaining(primaryTitle);
+        model.addAttribute("movies", movies);
         return "searchResults";
     }
 
