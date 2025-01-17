@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface MovieRepository extends CrudRepository<Movie, Integer> {
     List<Movie> findByPrimaryTitleIsContaining(String title);
+    List<Movie> findAllByOrderByPrimaryTitleAsc();
     List<Movie> findByTitleType(String typeOfShow);
 }

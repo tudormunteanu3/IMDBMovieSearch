@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(indexes = @Index(name = "index_primaryTitle", columnList = "primaryTitle ASC"))
+@Table(indexes = {@Index(name = "idx_primaryTitle", columnList = "primaryTitle ASC")})
 public class Movie implements Serializable {
 
     @Id

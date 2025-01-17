@@ -5,8 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
-
 @SpringBootApplication
 public class TudorImdbProjectApplication implements CommandLineRunner {
 
@@ -18,9 +16,8 @@ public class TudorImdbProjectApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws IOException {
-		String datasetPath = "C:\\Users\\tudor.munteanu\\Desktop\\Dev Academy\\Spring\\TudorIMDBProject\\title.basics.tsv.gz"; // Update with your file path
-		dataImporter.importData(datasetPath);
+	public void run(String... args) throws Exception {
+		String imdbDatasetPath = "C:\\Users\\tudor.munteanu\\Desktop\\Dev Academy\\Spring\\TudorIMDBProject\\title.basics.tsv.gz";
+		dataImporter.importData(imdbDatasetPath);
 	}
 }
-

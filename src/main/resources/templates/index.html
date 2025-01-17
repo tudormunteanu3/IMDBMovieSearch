@@ -1,14 +1,19 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>IMDB movie search </title>
+    <meta charset="UTF-8">
+    <title>IMDB Movie Search</title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="container">
 <h1>Search for a movie.</h1>
 <form action="#" th:action="@{/search}" method="get">
     <p>Enter a movie title:</p>
     <input type="text" name="primaryTitle" placeholder="Search by Movie Title">
     <button type="submit">Search</button>
 </form>
+</div>
 </body>
 </html>

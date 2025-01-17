@@ -27,7 +27,11 @@ public class MovieRepositoryController {
     public String getMovies (
             @RequestParam (value = "primaryTitle") String primaryTitle, Model model) {
         List<Movie> movies;
-        movies = movieRepository.findByPrimaryTitleIsContaining(primaryTitle);
+        if (primaryTitle != null && !primaryTitle.isEmpty()) {
+            movies = movieRepository.findByPrimaryTitleIsContaining(primaryTitle);
+        } else {
+            movies = movieRepository.findAllByOrderByPrimaryTitleAsc();
+        }
         model.addAttribute("movies", movies);
         return "searchResults";
     }

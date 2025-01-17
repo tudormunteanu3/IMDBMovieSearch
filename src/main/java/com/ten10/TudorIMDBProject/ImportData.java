@@ -34,7 +34,7 @@ public class ImportData {
         CSVParser records = format.parse(bufferedReader);
 
         List<Movie> movies = new ArrayList<>();
-        int batchSize = 1000;
+        int batchSize = 5000;
         int count = 0;
 
         for (CSVRecord record : records) {
