@@ -12,22 +12,42 @@
     <table>
         <thead>
         <tr>
-            <th>Alphanumeric ID</th>
             <th>IMDB ID</th>
             <th>Title</th>
             <th>Type</th>
+            <th>Total Votes</th>
+            <th>Average Rating</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="movie :${movies}">
+        <tr th:each="movie :${movies}" class="movie-row">
             <td th:text="${movie.tconst}"></td>
-            <td th:text="${movie.primaryTitle}"></td>
+            <td>
+                <a th:href="'https://www.imdb.com/title/tt' + ${movie.tconst}" target="_blank">
+                    <span th:text="${movie.primaryTitle}"></span>
+                </a>
+            </td>
             <td th:text="${movie.titleType}"></td>
+            <td th:text="${movie.numVotes}"></td>
+            <td th:text="${movie.averageRating}"></td>
+            <td>
+                <img th:src="${movie.posterUrl}" alt="Poster" style="width:100px; height:auto;">
+            </td>
         </tr>
         </tbody>
     </table>
-    <div class="footer">
-        <a href="/">Return to search page</a>
+
+    <div class="pagination">
+        <a th:if="${currentPage > 0 }" th:href="@{/search(primaryTitle=${primaryTitle}, page=${currentPage-1})}">
+            Previous page
+        </a>
+        <span>Page <span th:text="${currentPage + 1}">
+
+        </span> of <span th:text="${totalPages}"></span></span>
+        <a th:if="${currentPage + 1 < totalPages}"
+           th:href="@{/search(primaryTitle=${primaryTitle}, page=${currentPage + 1})}">
+            Next
+        </a>
     </div>
 </div>
 </body>
